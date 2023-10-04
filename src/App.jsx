@@ -15,6 +15,8 @@ const App = () => {
                                           defense: "",
                                           speed: "",
                                           type: "",
+                                          height: "",
+                                          weight: "",
                                         });
 
   const searchPokemon = () => {axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
@@ -28,14 +30,16 @@ const App = () => {
                                           defense: res.data.stats[2].base_stat,
                                           speed: res.data.stats[5].base_stat,
                                           type: res.data.types[0].type.name,
+                                          height: res.data.height,
+                                          weight: res.data.weight,
                                         });
                                         setPokemonChosen(true);
                                 })};
-  
+ 
 
 
 return (
-  
+ 
   <div className="App">
     <div className="TitleSection">
       <h1>Pokédex</h1>
@@ -44,9 +48,9 @@ return (
       <div>
         {pokemonName && <button onClick={searchPokemon}>Search Pokémon</button>}
       </div>
-    
+   
       <div className="DisplaySection">
-        {!pokemonChosen ? (<h2> Please choose a Pokémon</h2>) 
+        {!pokemonChosen ? (<h2> Please choose a Pokémon</h2>)
                         : (
                           <>
                             <h2>{pokemon.name}</h2>
@@ -58,14 +62,15 @@ return (
                             <h4>Attack: {pokemon.attack}</h4>
                             <h4>Defense: {pokemon.defense}</h4>
                             <h4>Speed: {pokemon.speed}</h4>
+                            <h4>Height: {pokemon.height/10}</h4>
+                            <h4>Weight: {pokemon.weight/10}</h4>
                           </>
                         )}
       </div>
     </div>
   </div>
-  
+ 
 )
 };
 
 export default App;
-
